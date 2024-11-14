@@ -3,7 +3,7 @@ import Cookies from "js-cookie";
 
 // Create an Axios instance
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:8080",
+  baseURL: "https://proyecto-tic1-backend-grupo8.onrender.com",
   headers: {
     "Content-Type": "application/json",
   },
