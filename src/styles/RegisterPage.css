@@ -1,74 +1,75 @@
 .signup-container {
-  width: 400px;
+  width: 450px; /* Increased width to match LogIn */
   margin: 50px auto;
-  padding: 20px;
-  border: 2px solid #7c4dff; /* Color violeta moderno */
+  padding: 25px; /* Increased padding */
+  border: 2px solid #7c4dff;
   border-radius: 12px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Sombra más pronunciada */
-  background-color: #ffffff; /* Fondo blanco para un look más limpio */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); /* Increased shadow */
+  background-color: #ffffff;
 }
 
 h2 {
   text-align: center;
-  color: #333333;
-  font-size: 24px; /* Tamaño de fuente más grande */
-  font-weight: 600; /* Texto más grueso */
-  margin-bottom: 20px; /* Mayor separación del contenido */
+  color: #333333; /* Changed to match LogIn */
+  font-size: 26px; /* Increased font size */
+  font-weight: 700; /* Bolder text */
+  margin-bottom: 30px; /* More space below the title */
 }
 
 .signup-form {
   display: flex;
   flex-direction: column;
-  gap: 15px; /* Añadido un gap entre los elementos */
+  gap: 20px; /* Increased space between elements */
 }
 
 .form-group {
-  margin-bottom: 15px;
+  margin-bottom: 20px; /* Increased bottom margin */
 }
 
 label {
-  font-weight: 500;
+  font-weight: 600; /* Slightly bolder */
   margin-bottom: 8px;
   display: block;
-  color: #555555; /* Color gris oscuro más suave */
+  color: #333333; /* Dark gray color */
 }
 
 input {
   width: 100%;
-  padding: 12px;
+  padding: 14px; /* Increased padding */
   box-sizing: border-box;
-  border: 2px solid #e0e0e0; /* Borde gris claro */
-  border-radius: 8px; /* Bordes más redondeados */
-  transition: border-color 0.3s ease; /* Transición suave para cambios de borde */
+  border: 2px solid #e0e0e0;
+  border-radius: 10px; /* More rounded corners */
+  font-size: 16px; /* Increased font size */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 input:focus {
-  border-color: #7c4dff; /* Borde violeta al enfocar */
+  border-color: #7c4dff;
+  box-shadow: 0 0 8px rgba(124, 77, 255, 0.5); /* Added shadow effect on focus */
   outline: none;
 }
 
 .SingUp-buttons {
   width: 100%;
-  padding: 12px;
-  background-color: #7c4dff; /* Color violeta */
+  padding: 15px; /* Increased padding */
   color: white;
+  background-color: #7c4dff;
   border: none;
-  border-radius: 8px; /* Bordes redondeados */
+  border-radius: 10px; /* More rounded corners */
   cursor: pointer;
-  font-size: 16px;
-  font-weight: 600;
-  transition: background-color 0.3s, transform 0.2s; /* Transición suave y animación */
-  margin-top: 10px;
+  margin-top: 20px; /* Increased top margin */
+  font-size: 18px; /* Larger font size */
+  font-weight: 700;
+  transition: background-color 0.3s, transform 0.2s;
 }
 
-/* Efecto hover y activo para los botones */
 .SingUp-buttons:hover {
-  background-color: #6a3ae5; /* Color más oscuro al pasar el cursor */
-  transform: scale(1.02); /* Efecto de agrandamiento suave */
+  background-color: #6a3ae5;
+  transform: scale(1.05); /* More pronounced enlargement effect */
 }
 
 .SingUp-buttons:active {
-  transform: scale(0.98); /* Efecto de reducción al hacer click */
+  transform: scale(0.98);
 }
 
 .error {
