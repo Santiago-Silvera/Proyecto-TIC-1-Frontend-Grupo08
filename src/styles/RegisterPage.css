@@ -49,6 +49,7 @@ input:focus {
     outline: none;
 }
 
+/* Updated button styles to match LogIn.css */
 .SingUp-buttons {
     width: 100%;
     padding: 15px;
@@ -57,7 +58,7 @@ input:focus {
     border: none;
     border-radius: 10px;
     cursor: pointer;
-    margin-top: 20px;
+    margin: 20px 0;
     font-size: 18px;
     font-weight: 700;
     transition: background-color 0.3s, transform 0.2s;
