@@ -1,79 +1,79 @@
 .signup-container {
-  width: 450px;
-  margin: 50px auto;
-  padding: 25px;
-  border: 2px solid #7c4dff;
-  border-radius: 12px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-  background-color: #ffffff;
+    width: 450px;
+    margin: 50px auto;
+    padding: 25px;
+    border: 2px solid #7c4dff;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    background-color: #FFA500; /* Changed to orange */
 }
 
 h2 {
-  text-align: center;
-  color: #333333;
-  font-size: 26px;
-  font-weight: 700;
-  margin-bottom: 30px;
+    text-align: center;
+    color: #333333;
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 30px;
 }
 
 .signup-form {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 .form-group {
-  margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 
 label {
-  font-weight: 600;
-  margin-bottom: 8px;
-  display: block;
-  color: #333333;
+    font-weight: 600;
+    margin-bottom: 8px;
+    display: block;
+    color: #333333;
 }
 
 input {
-  width: 100%;
-  padding: 14px;
-  box-sizing: border-box;
-  border: 2px solid #e0e0e0;
-  border-radius: 10px;
-  font-size: 16px;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    width: 100%;
+    padding: 14px;
+    box-sizing: border-box;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 16px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 input:focus {
-  border-color: #7c4dff;
-  box-shadow: 0 0 8px rgba(124, 77, 255, 0.5);
-  outline: none;
+    border-color: #7c4dff;
+    box-shadow: 0 0 8px rgba(124, 77, 255, 0.5);
+    outline: none;
 }
 
 .SingUp-buttons {
-  width: 100%;
-  padding: 15px;
-  color: white;
-  background-color: #7c4dff;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  margin-top: 20px;
-  font-size: 18px;
-  font-weight: 700;
-  transition: background-color 0.3s, transform 0.2s;
+    width: 100%;
+    padding: 15px;
+    color: white;
+    background-color: #7c4dff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: 700;
+    transition: background-color 0.3s, transform 0.2s;
 }
 
 .SingUp-buttons:hover {
-  background-color: #6a3ae5;
-  transform: scale(1.05);
+    background-color: #6a3ae5;
+    transform: scale(1.05);
 }
 
 .SingUp-buttons:active {
-  transform: scale(0.98);
+    transform: scale(0.98);
 }
 
 .error {
-  color: red;
-  font-size: 0.9em;
-  margin-top: 5px;
+    color: red;
+    font-size: 0.9em;
+    margin-top: 5px;
 }
