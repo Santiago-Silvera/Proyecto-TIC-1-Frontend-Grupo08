@@ -2,10 +2,10 @@
     width: 450px;
     margin: 50px auto;
     padding: 25px;
-    border: 2px solid #ff914d;
+    border: 2px solid #7c4dff;
     border-radius: 12px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-    background-color: #ff0088; /* Changed to orange */
+    background-color: #ffffff;
 }
 
 h2 {
@@ -44,8 +44,7 @@ input {
 }
 
 input:focus {
-    background-color: #007bff;
-    border-color: #ff914d;
+    border-color: #7c4dff;
     box-shadow: 0 0 8px rgba(124, 77, 255, 0.5);
     outline: none;
 }
