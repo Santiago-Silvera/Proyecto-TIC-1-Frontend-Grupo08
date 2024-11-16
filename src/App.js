@@ -25,6 +25,7 @@ const App = () => {
                 <Link to="/">
                     <img src={logo} className="App-logo" alt="logo" />
                 </Link>
+                <Button onClick={console.log(isLoggedIn)}> state </Button>
                 {isLoggedIn && (
                     <Link to="/movieUpload">
                         <Button>Upload a Movie</Button>
