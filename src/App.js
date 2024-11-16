@@ -31,7 +31,7 @@ const App = () => {
             <Link to="/movieUpload">
               <Button>Upload a Movie</Button>
             </Link>
-              <Button onClick={isLoggedIn = false}> restart</Button>
+            <Button onClick={isLoggedIn = false}> restart</Button>
             {isLoggedIn ? <ProfileMenu /> : <LoggedOutHeader />}
           </header>
 
