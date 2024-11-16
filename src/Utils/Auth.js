@@ -5,11 +5,12 @@ const Auth = () => {
   // Update localStorage whenever isLoggedIn changes
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [utilVar, setUtilVar] = useState(false);
 
   useEffect(() => {
     const jwtToken = Cookies.get("jwtToken");
     setIsLoggedIn(!!jwtToken);
-  }, []);
+  }, [utilVar]);
 
   const handleLogin = (jwtToken) => {
     if (jwtToken) {
@@ -17,12 +18,14 @@ const Auth = () => {
       console.log("Updated cookie 'jwtToken': ", Cookies.get("jwtToken"));
       Cookies.set("isLoggedIn", "true");
       console.log("Updated cookie 'isLoggedIn': ", Cookies.get("isLoggedIn"));
+      setUtilVar(true)
     }
   };
 
   const handleLogout = () => {
     Cookies.remove("jwtToken");
     Cookies.remove("isLoggedIn");
+    setUtilVar(false)
   }
 
   return {isLoggedIn, handleLogin, handleLogout}
