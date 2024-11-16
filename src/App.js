@@ -21,6 +21,7 @@ import Auth from "./Utils/Auth"
 // Main App Component
 const App = () => {
     let { isLoggedIn } = Auth();
+    console.log(isLoggedIn);
 
   return (
         <div className="App">
