@@ -1,70 +1,50 @@
-# Getting Started with Create React App
+# Frontend TIC I - Grupo 8
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Integrantes
 
-## Available Scripts
+- Ignacio Borreani
+- Lucia Eboli
+- Santiago Peña
+- Camila Pereira
+- Santiago Silvera 
 
-In the project directory, you can run:
+## Descrpicion del Proyecto
+El proyecto constaba de la creacion y desarrollo de un sistema para la gestion de cines, diseñado para la empresa "What The Fun Cinemas" para su desembarco en Uruguay. Este sistema tiene que permitir la gestion de la funcion de los cines y su logica de negocios. Inicialmente no se presica la funcion de compra de entradas, ay que para irrumpir en el mercado las mismas seran gratuitas temporalmente.
 
-### `npm start`
+En un inicio se contgara con 8 sucursales, con entre 3 y 10 salas, cada una con salas de 15 filas y 10 asientos
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Lista de Ubicaciones Iniciales
+|ID Sucursal|    	 Barrio      |Cantidad de Salas|
+|1          | Punta Carretas   |8                |
+|2          | Ciudad Vieja     |5                |
+|3          | Pocitos          |7                |
+|4          | Carrasco         |4                |
+|5          | Tres Cruces      |6                |
+|6          | Centro           |10               |
+|7          | Malvín	         |3                |
+|8          | Buceo	           |6                |
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Requerimientos 
+- Registro de usuario
+- Inicio de sesión de usuario
+- Cierre de sesión de usuario
+- Consulta de cartelera disponible
+- Reserva de asiento(s) disponible(s)
+- Cancelación de reserva
 
-### `npm test`
+## Caracteristicas Principales
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Flujo de la Aplicacion 
 
-### `npm run build`
+## Configuracion del Proyecto
+El proyecto fue creado en base a [Create React App](https://github.com/facebook/create-react-app).
+Para su uso, es necesario correr los comandos:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Para instalar dependencias
+  ### npm install
+- Para levantar un servidor local (Esto se hace en localhost:3000)
+  ### npm start
+- Para crear una version de produccion
+  ### npm run build
+  
+## Modelo Enitdad Relacion Base
