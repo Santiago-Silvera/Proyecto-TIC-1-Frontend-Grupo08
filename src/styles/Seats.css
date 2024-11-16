@@ -16,29 +16,34 @@
 }
 
 .seat {
-  width: 45px; /* Fixed width for each seat */
-  height: 45px; /* Fixed height for each seat */
-  background-color: #ccc; /* Default color */
+  width: 45px;
+  height: 45px;
+  background-color: #ccc;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  border-radius: 5px; /* Optional: can be adjusted or removed */
+  border-radius: 5px;
   text-align: center;
   font-size: 14px;
   user-select: none;
-  box-sizing: border-box; /* Ensure padding and borders are included in the size */
-  transition: background-color 0.2s ease; /* Smooth color transitions */
+  box-sizing: border-box;
+  transition: background-color 0.2s ease;
 }
 
 .seat.selected {
-  background-color: #4caf50; /* Highlight selected seats */
+  background-color: #4caf50; /* Green for selected seats */
+}
+
+.seat.taken {
+  background-color: #f44336; /* Red for taken seats */
+  cursor: not-allowed; /* Disable click on taken seats */
 }
 
 .seat:hover {
-  background-color: #aaa; /* Default hover color for unselected seats */
+  background-color: #aaa;
 }
 
 .seat.selected:hover {
-  background-color: #2e7d32; /* Dark green color for selected seats on hover */
+  background-color: #2e7d32; /* Dark green for selected seat hover */
 }

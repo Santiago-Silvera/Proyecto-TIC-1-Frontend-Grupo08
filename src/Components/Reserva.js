@@ -62,7 +62,7 @@ const Reserva = () => {
           return acc;
         }, []);
         setLocations(uniqueLocations);
-        console.log(locations)
+        console.log(locations);
       } catch (err) {
         console.error(err);
         setError("Error getting theater for the movie");
@@ -133,7 +133,7 @@ const Reserva = () => {
       );
       console.log(response.data);
       const screeningId = response.data;
-      navigate(`/seats?screeningId=${screeningId}`);
+      navigate(`/seats?screeningId=${screeningId}&roomId=${selectedRoomId}`);
     } catch (err) {
       console.error(err);
       setError("Error finding the screening");
@@ -142,7 +142,12 @@ const Reserva = () => {
 
   if (loading) return <div className="loading">Loading...</div>;
   if (error) return <div className="error">{error}</div>;
-  if (noScreeningsExists) return <div className="error">"Lo sentimos, pero no existen proyecciones de esta pelicual"</div>
+  if (noScreeningsExists)
+    return (
+      <div className="error">
+        "Lo sentimos, pero no existen proyecciones de esta pelicual"
+      </div>
+    );
 
   return (
     <div className="reserva-container">

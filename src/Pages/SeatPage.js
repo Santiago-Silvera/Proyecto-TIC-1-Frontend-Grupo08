@@ -6,9 +6,11 @@ import "../styles/Seats.css";
 const Seat = () => {
   const [searchParams] = useSearchParams();
   const screeningId = searchParams.get("screeningId");
+  const roomId = searchParams.get("roomId"); // Ensure roomId is retrieved here
 
-  const [seatCount, setSeatCount] = useState(0); // State for the total number of seats
-  const [selectedSeats, setSelectedSeats] = useState([]); // State for selected seats
+  const [seatCount, setSeatCount] = useState(0);
+  const [selectedSeats, setSelectedSeats] = useState([]);
+  const [takenSeats, setTakenSeatas] = useState([]);
 
   useEffect(() => {
     if (screeningId) {
@@ -19,6 +21,12 @@ const Seat = () => {
           );
           console.log(response);
           setSeatCount(response.data);
+
+          const res = await axiosInstance.get(
+            `/api/v1/screenings/seats?screeningId=${screeningId}`
+          );
+          console.log("Taken seats: " + res);
+          setTakenSeatas(res.data);
         } catch (err) {
           console.error("Error during fetch" + err);
         }
@@ -27,14 +35,40 @@ const Seat = () => {
     }
   }, [screeningId]);
 
-  // Function to toggle seat selection
-  const handleSeatClick = (seatIndex) => {
+  const handleSeatClick = (seatId) => {
+    if (takenSeats.includes(seatId)) {
+      return;
+    }
     setSelectedSeats(
       (prevSelected) =>
-        prevSelected.includes(seatIndex)
-          ? prevSelected.filter((index) => index !== seatIndex) // Deselect seat
-          : [...prevSelected, seatIndex] // Select seat
+        prevSelected.includes(seatId)
+          ? prevSelected.filter((id) => id !== seatId) // Deselect seat
+          : [...prevSelected, seatId] // Select seat
     );
+  };
+
+  const handleReserva = async () => {
+    if (selectedSeats.length === 0) {
+      alert("No seats selected!");
+      return;
+    }
+
+    try {
+      const response = await axiosInstance.post(
+        `/api/v1/screenings/reserve?screeningId=${screeningId}&seatNumbers=${selectedSeats}`
+      );
+
+      if (response.status === 200) {
+        alert("Seats booked successfully!");
+        // Optionally reset selected seats
+        setSelectedSeats([]);
+      } else {
+        alert("Failed to book seats. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error booking seats", error);
+      alert("An erroroccured while booking seats");
+    }
   };
 
   return (
@@ -42,19 +76,26 @@ const Seat = () => {
       <h2>Screening {screeningId}</h2>
       <div className="seats-container">
         <div className="seats-grid">
-          {Array.from({ length: seatCount }, (_, index) => (
-            <div
-              key={index}
-              className={`seat ${
-                selectedSeats.includes(index) ? "selected" : ""
-              }`}
-              onClick={() => handleSeatClick(index)}
-            >
-              {index + 1} {/* Display seat number (index + 1) */}
-            </div>
-          ))}
+          {Array.from({ length: seatCount }, (_, index) => {
+            const seatId = 150 * roomId + (index + 1); // Calculate seatId
+            const isTaken = takenSeats.includes(seatId); // Check if seat is taken
+            return (
+              <div
+                key={index}
+                className={`seat ${
+                  selectedSeats.includes(seatId) ? "selected" : ""
+                } ${isTaken ? "taken" : ""}`}
+                onClick={() => handleSeatClick(seatId)} // Pass seatId here
+              >
+                {index + 1}
+              </div>
+            );
+          })}
         </div>
       </div>
+      <button className="seat-button" onClick={handleReserva}>
+        Reservar
+      </button>
 
       <p>
         Selected seats: {selectedSeats.map((index) => index + 1).join(", ")}
