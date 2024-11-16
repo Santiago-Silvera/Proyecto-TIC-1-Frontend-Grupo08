@@ -23,9 +23,10 @@
 }
 
 .movie-card {
-  background-color: #222222; /* Fondo blanco para las tarjetas */
+  background-color: #ffffff; /* Fondo blanco para las tarjetas */
   overflow: hidden; /* Asegura que las imágenes no se desborden */
   text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
   display: flex;
   flex-direction: column; /* Alinea la imagen y el texto verticalmente */
   justify-content: center; /* Centra los elementos verticalmente */
@@ -33,20 +34,12 @@
 }
 
 .movie-card img {
-  border: 1px solid #202020;
   width: 100%; /* La imagen ocupará todo el ancho de la tarjeta */
   height: auto; /* Mantiene las proporciones de la imagen */
   object-fit: contain;
 }
 
-.text_container {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Sombra suave */
-  background-color: #ffffff;
-  overflow:hidden;
-  width: 100%;
-}
-
-.text_container h3 {
+.movie-card h3 {
   margin: 12px 0;
   font-size: 1.2rem;
   color: #333; /* Make sure the text color is visible */
