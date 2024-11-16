@@ -54,9 +54,6 @@ const App = () => {
         <Link to="/">
           <img src={logo} className="App-logo" alt="logo" />
         </Link>
-        <Link to="/movieUpload">
-          <Button>Upload a Movie</Button>
-        </Link>
         {isLoggedIn ? <ProfileMenu /> : <LoggedOutHeader />}
       </header>
 

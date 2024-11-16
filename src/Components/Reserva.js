@@ -179,11 +179,13 @@ const Reserva = () => {
           }}
         >
           <option value="">Select a location</option>
-          {locations.map((location) => (
-            <option key={location.id} value={location.id}>
-              {location.name}
-            </option>
-          ))}
+          {locations
+              .sort((a, b) => a.name.localeCompare(b.name)) // Sort alphabetically by name
+              .map((location) => (
+                  <option key={location.id} value={location.id}>
+                    {location.name}
+                  </option>
+              ))}
         </select>
       </div>
 
@@ -196,11 +198,13 @@ const Reserva = () => {
               onChange={(e) => setSelectedDate(e.target.value)}
             >
               <option value="">Seleccione una fecha</option>
-              {dates.map((date) => (
-                <option key={date} value={date}>
-                  {moment(date).format("DD-MM HH:mm")}
-                </option>
-              ))}
+              {dates
+                  .sort((a, b) => moment(a).isBefore(moment(b)) ? -1 : 1) // Se ordenan las fechas
+                  .map((date) => (
+                      <option key={date} value={date}>
+                        {moment(date).format("DD-MM HH:mm")}
+                      </option>
+                  ))}
             </select>
           </div>
         )}
