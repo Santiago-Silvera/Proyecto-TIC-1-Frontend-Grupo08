@@ -23,11 +23,10 @@
 }
 
 .movie-card {
-  background-color: #fff; /* Fondo blanco para las tarjetas */
-  border-radius: 8px; /* Bordes redondeados */
+  background-color: #ffffff; /* Fondo blanco para las tarjetas */
   overflow: hidden; /* Asegura que las imágenes no se desborden */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
   text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
   display: flex;
   flex-direction: column; /* Alinea la imagen y el texto verticalmente */
   justify-content: center; /* Centra los elementos verticalmente */

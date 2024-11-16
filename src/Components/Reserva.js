@@ -49,8 +49,6 @@ const Reserva = () => {
         );
         setLoading(false);
         console.log(response);
-        console.log(response.data);
-        console.log(response.data.length);
         if (response.data.length === 0) {
           setNoScreeningsExists(true);
         }
@@ -72,7 +70,11 @@ const Reserva = () => {
   }, [selectedMovie]);
 
   useEffect(() => {
-    if (selectedLocationId !== null && selectedLocationId !== " ") {
+    if (
+      selectedLocationId !== null &&
+      selectedLocationId !== "" &&
+      selectedLocationId !== " "
+    ) {
       // Reset dependent states
       setSelectedDate("");
 
@@ -94,7 +96,6 @@ const Reserva = () => {
           setError("Error getting the available times");
         }
       };
-
       fetchDates();
     }
   }, [selectedLocationId]);

@@ -44,7 +44,7 @@ const Listings = () => {
           <Link to={`/reserva?movie=${movie.movieId}`}>
             <div key={movie.movieId} className="movie-card">
               <img src={`data:image/jpeg;base64,${movie.image}`} alt="foto" />
-              <h3>{movie.title}</h3>
+                <h3>{movie.title}</h3>
             </div>
           </Link>
         ))}
