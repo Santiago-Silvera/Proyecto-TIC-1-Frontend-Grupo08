@@ -69,6 +69,12 @@ const Reserva = () => {
   }, [selectedMovie]);
 
   useEffect(() => {
+    if (selectedLocationId === "") {
+      setDates([])
+      setRooms([])
+      setSelectedRoomId(null)
+      setSelectedDate("");
+    }
     if (
       selectedLocationId !== null &&
       selectedLocationId !== "" &&
@@ -155,7 +161,7 @@ const Reserva = () => {
   if (noScreeningsExists)
     return (
       <div className="error">
-        "Lo sentimos, pero no existen proyecciones de esta pelicua"
+        "Lo sentimos, pero no existen proyecciones de esta pelicula"
       </div>
     );
 
