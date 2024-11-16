@@ -1,98 +1,89 @@
 .signup-container {
-    width: 450px; /* Aumenté el ancho */
-    margin: 50px auto;
-    padding: 25px; /* Aumenté el padding */
-    border: 2px solid #7c4dff; /* Color violeta más moderno */
-    border-radius: 12px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); /* Aumenté la sombra */
-    background-color: #ffffff; /* Fondo blanco para un look más limpio */
+  width: 450px; /* Aumenté el ancho */
+  margin: 50px auto;
+  padding: 25px; /* Aumenté el padding */
+  border: 2px solid #7c4dff; /* Color violeta más moderno */
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); /* Aumenté la sombra */
+  background-color: #ffffff; /* Fondo blanco para un look más limpio */
 }
 
 h2 {
-    text-align: center;
-    color: #ffffff !important;
-    font-size: 26px; /* Aumenté el tamaño de la fuente */
-    font-weight: 700; /* Texto más grueso */
-    margin-bottom: 30px; /* Más espacio debajo del título */
+  text-align: center;
+  color: #ffffff;
+  font-size: 26px; /* Aumenté el tamaño de la fuente */
+  font-weight: 700; /* Texto más grueso */
+  margin-bottom: 30px; /* Más espacio debajo del título */
 }
 
 .signup-form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px; /* Aumenté el espacio entre los elementos */
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Aumenté el espacio entre los elementos */
 }
 
 .form-group {
-    margin-bottom: 20px; /* Aumenté el espacio inferior */
+  margin-bottom: 20px; /* Aumenté el espacio inferior */
 }
 
 label {
-    font-weight: 600; /* Un poco más grueso */
-    margin-bottom: 8px;
-    display: block;
-    color: #333333; /* Color gris oscuro */
+  font-weight: 600; /* Un poco más grueso */
+  margin-bottom: 8px;
+  display: block;
+  color: #333333; /* Color gris oscuro */
 }
 
 input {
-    width: 100%;
-    padding: 14px; /* Aumenté el padding */
-    box-sizing: border-box;
-    border: 2px solid #e0e0e0; /* Borde gris claro */
-    border-radius: 10px; /* Bordes más redondeados */
-    font-size: 16px; /* Aumenté el tamaño de la fuente */
-    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Transición suave para cambios de borde */
+  width: 100%;
+  padding: 14px; /* Aumenté el padding */
+  box-sizing: border-box;
+  border: 2px solid #e0e0e0; /* Borde gris claro */
+  border-radius: 10px; /* Bordes más redondeados */
+  font-size: 16px; /* Aumenté el tamaño de la fuente */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Transición suave para cambios de borde */
 }
 
 input:focus {
-    border-color: #7c4dff; /* Borde violeta al enfocar */
-    box-shadow: 0 0 8px rgba(124, 77, 255, 0.5); /* Efecto de sombra al enfocar */
-    outline: none;
+  border-color: #7c4dff; /* Borde violeta al enfocar */
+  box-shadow: 0 0 8px rgba(124, 77, 255, 0.5); /* Efecto de sombra al enfocar */
+  outline: none;
 }
 
 .LogIn-container {
-    display: flex;
-    justify-content: center;
-    margin: 50px auto;
+  display: flex;
+  justify-content: center;
+  margin: 50px auto;
 }
 
 .LogIn-buttons-container {
-    width: 450px; /* Aumenté el ancho */
-    padding: 20px;
-    border: 2px solid #7c4dff; /* Color violeta más moderno */
-    border-radius: 12px;
-    background-color: #fafafa; /* Fondo más claro */
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); /* Aumenté la sombra */
+  width: 450px; /* Aumenté el ancho */
+  padding: 20px;
+  border: 2px solid #7c4dff; /* Color violeta más moderno */
+  border-radius: 12px;
+  background-color: #fafafa; /* Fondo más claro */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); /* Aumenté la sombra */
 }
 
 .LogIn-buttons {
-    width: 100%;
-    padding: 15px; /* Aumenté el padding */
-    color: white;
-    background-color: #7c4dff; /* Color violeta para los botones */
-    border: none;
-    border-radius: 10px; /* Bordes más redondeados */
-    cursor: pointer;
-    margin: 20px 0; /* Más espacio entre botones */
-    font-size: 18px; /* Tamaño de fuente más grande */
-    font-weight: 700;
-    transition: background-color 0.3s, transform 0.2s; /* Añadido efecto hover */
+  width: 100%;
+  padding: 15px; /* Aumenté el padding */
+  color: white;
+  background-color: #7c4dff; /* Color violeta para los botones */
+  border: none;
+  border-radius: 10px; /* Bordes más redondeados */
+  cursor: pointer;
+  margin: 20px 0; /* Más espacio entre botones */
+  font-size: 18px; /* Tamaño de fuente más grande */
+  font-weight: 700;
+  transition: background-color 0.3s, transform 0.2s; /* Añadido efecto hover */
 }
 
 /* Efecto hover y activo para los botones */
 .LogIn-buttons:hover {
-    background-color: #6a3ae5; /* Color más oscuro al pasar el cursor */
-    transform: scale(1.05); /* Efecto de agrandamiento más pronunciado */
+  background-color: #6a3ae5; /* Color más oscuro al pasar el cursor */
+  transform: scale(1.05); /* Efecto de agrandamiento más pronunciado */
 }
 
 .LogIn-buttons:active {
-    transform: scale(0.98); /* Efecto de reducción al hacer click */
+  transform: scale(0.98); /* Efecto de reducción al hacer click */
 }
-
-
-
-
-
-
-
-
-

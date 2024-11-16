@@ -1,76 +1,87 @@
 .reserva-container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 2px solid #7c4dff;
-    border-radius: 10px;
-    background-color: #f9f9f9;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 2px solid #7c4dff;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
 h2 {
-    text-align: center;
-    color: #7c4dff;
-    font-size: 24px;
-    margin-bottom: 20px;
+  text-align: center;
+  color: #7c4dff;
+  font-size: 24px;
+  margin-bottom: 20px;
 }
 
 .reserva-field {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 label {
-    display: block;
-    font-weight: 600;
-    margin-bottom: 10px;
-    color: #333;
+  display: block;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #333;
 }
 
-select, input[type="date"], input[type="time"] {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    margin-top: 5px;
+select,
+input[type="date"],
+input[type="time"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-top: 5px;
 }
 
 .seats-container {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
 }
 
 .seat {
-    padding: 15px;
-    background-color: #7c4dff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+  padding: 15px;
+  background-color: #7c4dff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 .seat.selected {
-    background-color: #b56cc4;
+  background-color: #b56cc4;
 }
 
 .seat:hover {
-    background-color: #6a3ae5;
+  background-color: #6a3ae5;
 }
 
 .reserva-button {
-    width: 100%;
-    padding: 12px;
-    background-color: #7c4dff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+  width: 100%;
+  padding: 12px;
+  background-color: #7c4dff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 .reserva-button:hover {
-    background-color: #6a3ae5;
+  background-color: #6a3ae5;
+}
+
+.no-dates {
+  color: red;
+  font-weight: bold;
+}
+
+.reserva-title {
+  color: #333;
 }

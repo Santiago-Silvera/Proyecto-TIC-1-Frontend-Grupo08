@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import "../styles/Reservations.css";
 import axiosInstance from "../Utils/AxiosConfig";
+import Cookies from "js-cookie";
+import moment from "moment";
 // Que falta
 // Al seleccionar las peliculas, se reinicia cine y lo demas (Se actualiza selected Movie, se ven  los cines para esa peli y reinicia lo demas )
 // Al seleccionar el cine, se reinicia horas fechas y asientos
@@ -14,157 +16,120 @@ const Reserva = () => {
   const [error, setError] = useState(null);
   const [searchParams, setSearchParams] = useSearchParams();
   const [selectedDate, setSelectedDate] = useState("");
-  const [selectedTime, setSelectedTime] = useState("");
-  const [selectedSeats, setSelectedSeats] = useState([]);
-  const [selectedLocation, setSelectedLocation] = useState("");
-  const [movies, setMovies] = useState([]);
+  const [selectedLocationId, setSelectedLocationId] = useState(null);
+  const [selectedRoomId, setSelectedRoomId] = useState(null);
+  // const [movies, setMovies] = useState([]);
   const [locations, setLocations] = useState([]);
   const [dates, setDates] = useState([]);
-  const [availableSeats, setAvailableSeats] = useState([]);
+  const [rooms, setRooms] = useState([]);
+
+  const navigate = useNavigate();
+
+  // Verificar si el usuario está logueado
+  useEffect(() => {
+    const isLoggedIn = Cookies.get("isLoggedIn");
+    if (!isLoggedIn || isLoggedIn !== "true") {
+      navigate("/login"); // Reemplaza "/login" con la ruta de tu página de inicio de sesión
+    }
+  }, [navigate]);
 
   const selectedMovie = searchParams.get("movie");
-  //   console.log("selected movie:" + selectedMovie);
-
-  // // Se consiguen las peliculas
-  // useEffect(() => {
-  //     // Se define una funcion
-  //     const fetchMovies = async () => {
-  //         try {
-  //             const response = await axiosInstance.get("/api/v1/movies");
-  //             console.log("Fetching movies to backend");
-  //             setMovies(response.data);
-  //             setLoading(false);
-  //         } catch (err) {
-  //             setError("Failed to load movies.");
-  //             setLoading(false);
-  //         }
-  //     };
-  //     // Se llama para guarar las peliculas
-  //     fetchMovies();
-
-  // }, []);
 
   // Una vez se selecciona la pelicula, se elige el cine, cuando pasa se reinician los valores de horas y dias
   // Siempre hay una pelicula seleccionada una vez se elige una
   useEffect(() => {
     // Se reinicia lo que viene despues
-    setSelectedSeats([]);
-    setSelectedTime("");
     setSelectedDate("");
-    setSelectedLocation("");
     const fetchScreenings = async () => {
       try {
+        console.log("Fetching theaters for movie:" + selectedMovie);
         const response = await axiosInstance.get(
           `/api/v1/movies/theaters?movieId=${selectedMovie}`
         );
         setLoading(false);
         console.log(response);
         // Ver localidades de las peliculas
-        const uniqueLocations = response.data
-          .map((ele) => ele.location) // Se mapean los lugares en cada screening
-          .filter((value, index, self) => self.indexOf(value) === index); // Se filtrar para que sean unicos
+        const uniqueLocations = response.data.reduce((acc, ele) => {
+          if (!acc.some((loc) => loc.id === ele.theaterId)) {
+            acc.push({ id: ele.theaterId, name: ele.theaterZone });
+          }
+          return acc;
+        }, []);
         setLocations(uniqueLocations);
       } catch (err) {
-        setError("Failed to load screenings");
+        console.error(err);
+        setError("Error getting theater for the movie");
       }
     };
     fetchScreenings();
   }, [selectedMovie]);
 
-  // Conseguir las fechas una vez se tiene el lugar y pelicula
   useEffect(() => {
-    if (selectedLocation !== "") {
-      // Se resetean los valores
-      setSelectedSeats([]);
-      setSelectedTime("");
+    if (selectedLocationId !== null) {
+      // Reset dependent states
       setSelectedDate("");
+
       const fetchDates = async () => {
         try {
-          const response = await axiosInstance.get(
-            `/api/v1/screenings/${selectedMovie}/${selectedLocation}`
+          console.log(
+            "Fetching for times with movieId: " +
+              selectedMovie +
+              " and theaterId: " +
+              selectedLocationId
           );
-          // Ver dias de las peliculas
-          const uniqueDates = response.data
-            .map((ele) => ele.date) // Se mapean los las fechas de los screening
-            .filter((value, index, self) => self.indexOf(value) === index); // Se filtrar para que sean unicos
-          setDates(uniqueDates);
+          const response = await axiosInstance.get(
+            `/api/v1/movies/times?movieId=${selectedMovie}&theaterId=${selectedLocationId}`
+          );
+          console.log(response.data);
+          setDates(response.data);
         } catch (err) {
-          setError("Failed to load screenings");
+          console.error(err);
+          setError("Error getting the available times");
         }
       };
+
       fetchDates();
     }
-  }, [selectedLocation]);
+  }, [selectedLocationId]);
 
-  // Conseguir las horas una vez se tiene lo de arriba
   useEffect(() => {
     if (selectedDate !== "") {
-      // Se resetean los valores
-      setSelectedSeats([]);
-      setSelectedTime("");
-      const fetchTimes = async () => {
+      const fetchRooms = async () => {
         try {
-          const response = await axiosInstance.get(
-            `/api/v1/screenings/${selectedMovie}/${selectedLocation}/${selectedDate}`
+          console.log("Fetching rooms");
+          const formattedDate = moment(selectedDate).format(
+            "YYYY-MM-DD HH:mm:ss"
           );
-          // Ver dias de las peliculas
-          const uniqueDates = response.data
-            .map((ele) => ele.times) // Se mapean los las fechas de los screening
-            .filter((value, index, self) => self.indexOf(value) === index); // Se filtrar para que sean unicos
-          setDates(uniqueDates);
+          const response = await axiosInstance.get(
+            `/api/v1/movies/rooms?movieId=${selectedMovie}&theaterId=${selectedLocationId}&startTime=${formattedDate}`
+          );
+          console.log(response.data);
+          const rooms = response.data.map((roomDTO) => roomDTO.roomId);
+          setRooms(rooms);
         } catch (err) {
-          setError("Failed to load screenings");
+          console.error(err);
+          setError("Error getting the room");
         }
       };
-      fetchTimes();
+
+      fetchRooms();
     }
   }, [selectedDate]);
 
-  // Conseguir las horas una vez se tiene lo de arriba
-  useEffect(() => {
-    if (selectedTime !== "") {
-      // Se resetean los valores
-      setSelectedSeats([]);
-      const fetchSeats = async () => {
-        try {
-          const response = await axiosInstance.get(
-            `/api/v1/screenings/${selectedMovie}/${selectedLocation}/${selectedDate}/${selectedTime}`
-          );
-          // Ver dias de las peliculas
-          setAvailableSeats(response.data.seats);
-        } catch (err) {
-          setError("Failed to load screenings");
-        }
-      };
-      fetchSeats();
-    }
-  }, [selectedTime]);
-
-  // Manejar la selección de asientos
-  const handleSeatSelection = (seat) => {
-    if (selectedSeats.includes(seat)) {
-      setSelectedSeats(selectedSeats.filter((s) => s !== seat));
-    } else {
-      setSelectedSeats([...selectedSeats, seat]);
-    }
-  };
-
-  // Manejar la confirmación de la reserva
-  const handleReserve = () => {
-    if (
-      selectedMovie &&
-      selectedDate &&
-      selectedTime &&
-      selectedSeats.length > 0 &&
-      selectedLocation
-    ) {
-      alert(
-        `Reserva confirmada para ${selectedMovie} en ${selectedLocation} el ${selectedDate} a las ${selectedTime}. Asientos: ${selectedSeats.join(
-          ", "
-        )}`
+  // Encontrar el screening dado los datos y seguir a seleccion de asientos
+  const handleReserve = async () => {
+    try {
+      console.log("Finding screening");
+      const formattedDate = moment(selectedDate).format("YYYY-MM-DD HH:mm:ss");
+      const response = await axiosInstance.get(
+        `/api/v1/movies/screenings?movieId=${selectedMovie}&roomId=${selectedRoomId}&startTime=${formattedDate}`
       );
-    } else {
-      alert("Por favor, complete todos los campos para hacer la reserva.");
+      console.log(response.data);
+      const screeningId = response.data;
+      navigate(`/seats?screeningId=${screeningId}`);
+    } catch (err) {
+      console.error(err);
+      setError("Error finding the screening");
     }
   };
 
@@ -173,86 +138,67 @@ const Reserva = () => {
 
   return (
     <div className="reserva-container">
-      <h2>Reserva tu Película</h2>
-
-      {/* Selección de Película
-      <div className="reserva-field">
-        <label>Selecciona una película:</label>
-        <select
-          value={selectedMovie ? selectedMovie.title : ""}
-          onChange={(e) => {
-            const selectedMovie = movies.find(
-              (movie) => movie.title === e.target.value
-            );
-            setSelectedMovie(selectedMovie);
-          }}
-        >
-          <option value="">--Selecciona una película--</option>
-          {movies.map((movie, index) => (
-            <option key={index} value={movie.title}>
-              {movie.title}
-            </option>
-          ))}
-        </select>
-      </div> */}
-
+      <h2 className="reserva-title">Realiza la reserva de tu pelicula</h2>
       {/* Selección de Lugar (cine) ajustar a que a travez del lugar se seleccione el objeto, como arriba*/}
       <div className="reserva-field">
         <label>Selecciona el cine:</label>
         <select
-          value={selectedLocation}
-          onChange={(e) => setSelectedLocation(e.target.value)}
+          value={selectedLocationId}
+          onChange={(e) => {
+            const selectedId = e.target.value;
+            setSelectedLocationId(selectedId);
+          }}
         >
-          <option value="">--Selecciona un cine--</option>
-          {locations.map((location, index) => (
-            <option key={index} value={location}>
-              {location}
+          <option value="">Select a location</option>
+          {locations.map((location) => (
+            <option key={location.id} value={location.id}>
+              {location.name}
             </option>
           ))}
         </select>
       </div>
 
-      {/* Selección de Fecha Solo de las posibles*/}
-      <div className="reserva-field">
-        <label>Selecciona la fecha:</label>
-        <input
-          type="date"
-          value={selectedDate}
-          onChange={(e) => setSelectedDate(e.target.value)}
-        />
-      </div>
-
-      {/* Selección de Hora Solo de las posibles*/}
-      <div className="reserva-field">
-        <label>Selecciona la hora:</label>
-        <input
-          type="time"
-          value={selectedTime}
-          onChange={(e) => setSelectedTime(e.target.value)}
-        />
-      </div>
-
-      {/* Selección de Asientos  Aniadir diferencias seleccionados y no*/}
-      <div className="reserva-field">
-        <label>Selecciona tus asientos:</label>
-        <div className="seats-container">
-          {availableSeats.map((seat, index) => (
-            <button
-              key={index}
-              className={`seat ${
-                selectedSeats.includes(seat) ? "selected" : ""
-              }`}
-              onClick={() => handleSeatSelection(seat)}
+      <div>
+        {dates.length > 0 && (
+          <div className="reserva-field">
+            <label>Selecciona la fecha:</label>
+            <select
+              value={selectedDate}
+              onChange={(e) => setSelectedDate(e.target.value)}
             >
-              {seat}
-            </button>
-          ))}
-        </div>
+              <option value="">Seleccione una fecha</option>
+              {dates.map((date) => (
+                <option key={date} value={date}>
+                  {moment(date).format("DD-MM HH:mm")}
+                </option>
+              ))}
+            </select>
+          </div>
+        )}
+      </div>
+
+      <div>
+        {rooms.length > 0 && (
+          <div className="reserva-field">
+            <label>Selecciona la sala:</label>
+            <select
+              value={selectedRoomId}
+              onChange={(e) => setSelectedRoomId(e.target.value)}
+            >
+              <option value="">Seleccione la sala</option>
+              {rooms.map((room) => (
+                <option key={room} value={room}>
+                  {"Sala " + room}
+                </option>
+              ))}
+            </select>
+          </div>
+        )}
       </div>
 
       {/* Botón de Confirmar Reserva */}
       <button className="reserva-button" onClick={handleReserve}>
-        Confirmar Reserva
+        Siguiente
       </button>
     </div>
   );
