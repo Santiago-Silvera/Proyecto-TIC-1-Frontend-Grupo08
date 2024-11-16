@@ -1,14 +1,15 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom"; // If using React Router for navigation
-import Cookies from "js-cookie";
+import Auth from "../Utils/Auth";
+
 
 const Logout = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
     // Remove the authentication cookie (e.g., 'isLoggedIn')
-    Cookies.remove("isLoggedIn");
-    Cookies.remove("jwtToken");
+    Auth.handleLogout()
+
 
     // Redirect to login page (or home page)
     navigate("/login");

@@ -8,7 +8,6 @@ const LogIn = () => {
   // Estados para el correo electrónico y la contraseña
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const { handleLogin } = Auth();
   const navigate = useNavigate(); // Inicializar useNavigate
 
   // Función para manejar el inicio de sesión con email
@@ -21,7 +20,7 @@ const LogIn = () => {
       console.log("Login successful:", response.data);
       const jwtToken = response.data["jwt"];
       console.log("Retrieved token: ", jwtToken);
-      handleLogin(jwtToken);
+      Auth.handleLogin(jwtToken);
       navigate("/");
     } catch (error) {
       // TODO: Mostrar que hubo un error con el log in
