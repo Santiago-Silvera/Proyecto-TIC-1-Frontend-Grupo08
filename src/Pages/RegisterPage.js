@@ -1,146 +1,73 @@
 import React, { useState } from "react";
+import axiosInstance from "../Utils/AxiosConfig";
+import { useNavigate } from "react-router-dom";
 import "../styles/RegisterPage.css";
 import Auth from "../Utils/Auth";
-import { useNavigate } from "react-router-dom"; // Importar useNavigate para redirigir
-import axiosInstance from "../Utils/AxiosConfig";
 
-const SignUp = () => {
+const RegisterPage = () => {
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const { handleLogin } = Auth();
+  const navigate = useNavigate();
 
-  const navigate = useNavigate(); // Inicializar useNavigate para la redirección
-
-  const [formData, setFormData] = useState({
-    username: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-  });
-
-  const [errors, setErrors] = useState({});
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
-
-  const validate = () => {
-    const errors = {};
-
-    if (!formData.username.trim()) {
-      errors.username = "Name is required";
-    }
-    if (!formData.email.trim()) {
-      errors.email = "Email is required";
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      errors.email = "Email is invalid";
-    }
-    if (!formData.password) {
-      errors.password = "Password is required";
-    } else if (formData.password.length < 6) {
-      errors.password = "Password must be at least 6 characters";
-    }
-    if (formData.password !== formData.confirmPassword) {
-      errors.confirmPassword = "Passwords do not match";
+  const handleSubmit = async () => {
+    if (password !== confirmPassword) {
+      console.error("Passwords do not match");
+      return;
     }
 
-    return errors;
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const validationErrors = validate();
-    if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors);
-    } else {
-      try {
-        console.log(formData);
-        const response = await axiosInstance.post(
-          "/api/v1/users/register",
-          formData // Send the form data directly
-        );
-
-        if (response.status === 200 || response.status === 201) {
-          // Assuming 200 or 201 for success
-          const jwtToken = response.data["jwt"];
-          console.log("Sign up successful:", jwtToken);
-          handleLogin(jwtToken);
-          navigate("/");
-        } else {
-          console.error(
-            "Error signing up:",
-            response.status,
-            response.statusText
-          );
-        }
-      } catch (error) {
-        console.error("Error:", error.response ? error.response.data : error);
-      }
+    try {
+      const response = await axiosInstance.post("/api/v1/users/register", {
+        username,
+        email,
+        password,
+      });
+      console.log("Registration successful:", response.data);
+      const jwtToken = response.data["jwt"];
+      console.log("Retrieved token: ", jwtToken);
+      handleLogin(jwtToken);
+      navigate("/");
+    } catch (error) {
+      console.error("Error during registration:", error);
     }
   };
 
   return (
-    <div className="signup-container">
-      <h2>Sign Up</h2>
-      <form onSubmit={handleSubmit} className="signup-form">
-        <div className="form-group">
-          <label htmlFor="username">Username</label>
+      <div className="RegisterPage-container">
+        <div className="register-form">
+          <h2>Sign Up</h2>
           <input
-            type="text"
-            id="username"
-            name="username"
-            value={formData.username}
-            onChange={handleChange}
+              type="text"
+              placeholder="Username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
           />
-          {errors.username && <span className="error">{errors.username}</span>}
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="email">Email</label>
           <input
-            type="email"
-            id="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
           />
-          {errors.email && <span className="error">{errors.email}</span>}
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="password">Password</label>
           <input
-            type="password"
-            id="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
           />
-          {errors.password && <span className="error">{errors.password}</span>}
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="confirmPassword">Confirm Password</label>
           <input
-            type="password"
-            id="confirmPassword"
-            name="confirmPassword"
-            value={formData.confirmPassword}
-            onChange={handleChange}
+              type="password"
+              placeholder="Confirm Password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
           />
-          {errors.confirmPassword && (
-            <span className="error">{errors.confirmPassword}</span>
-          )}
+          <button onClick={handleSubmit} className="RegisterPage-buttons">
+            Sign Up
+          </button>
         </div>
-
-        <button type="submit" className="SignUp-button">
-          Sign Up
-        </button>
-      </form>
-    </div>
+      </div>
   );
 };
 
-export default SignUp;
+export default RegisterPage;
