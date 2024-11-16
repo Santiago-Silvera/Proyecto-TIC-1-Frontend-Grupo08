@@ -11,7 +11,7 @@ import moment from "moment";
 // Selecciona hora, reinicia asiento seleccionado
 
 const Reserva = () => {
-  // opciones que el usuario puede seleccionar
+  // Opciones que el usuario puede seleccionar
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [searchParams, setSearchParams] = useSearchParams();
@@ -22,6 +22,7 @@ const Reserva = () => {
   const [locations, setLocations] = useState([]);
   const [dates, setDates] = useState([]);
   const [rooms, setRooms] = useState([]);
+  const [noScreeningsExists, setNoScreeningsExists] = useState(false);
 
   const navigate = useNavigate();
 
@@ -48,6 +49,11 @@ const Reserva = () => {
         );
         setLoading(false);
         console.log(response);
+        console.log(response.data);
+        console.log(response.data.length);
+        if (response.data.length === 0) {
+          setNoScreeningsExists(true);
+        }
         // Ver localidades de las peliculas
         const uniqueLocations = response.data.reduce((acc, ele) => {
           if (!acc.some((loc) => loc.id === ele.theaterId)) {
@@ -56,6 +62,7 @@ const Reserva = () => {
           return acc;
         }, []);
         setLocations(uniqueLocations);
+        console.log(locations)
       } catch (err) {
         console.error(err);
         setError("Error getting theater for the movie");
@@ -65,7 +72,7 @@ const Reserva = () => {
   }, [selectedMovie]);
 
   useEffect(() => {
-    if (selectedLocationId !== null) {
+    if (selectedLocationId !== null && selectedLocationId !== " ") {
       // Reset dependent states
       setSelectedDate("");
 
@@ -135,6 +142,7 @@ const Reserva = () => {
 
   if (loading) return <div className="loading">Loading...</div>;
   if (error) return <div className="error">{error}</div>;
+  if (noScreeningsExists) return <div className="error">"Lo sentimos, pero no existen proyecciones de esta pelicual"</div>
 
   return (
     <div className="reserva-container">

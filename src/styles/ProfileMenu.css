@@ -8,6 +8,7 @@
   height: 50px;
   border-radius: 50%;
   cursor: pointer;
+  margin: 20px;
 }
 
 .floating-dropdown {
