@@ -1,4 +1,4 @@
-import React, {useState, useEffect, createContext, useContext, useReducer } from "react";
+import React, {useState, useEffect} from "react";
 import "./styles/App.css";
 import { Route, Routes } from "react-router-dom";
 import LogIn from "./Pages/LogInPage.js";
@@ -16,35 +16,41 @@ import Cookies from "js-cookie";
 import Profile from "./Pages/ProfilePage.js";
 import Logout from "./Pages/LogoutPage.js";
 
-// Para que se actualize el header
-// Se crea un contexto que guarda si se esta logeado
-const LoginContext = createContext({
-    isLoggedIn: false,
-    setIsLoggedIn: (value) => {},
-});
-
-const useLogin = () => useContext(LoginContext);
 
 // Main App Component
 const App = () => {
     // Se crea la constante para guardar el estado
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [state, forceUpdate] = useReducer(x => x + 1, 0);
+
+    const doesCookieExist = (name) => {
+        const cookies = document.cookie.split('; ');
+        return cookies.some(cookie => cookie.startsWith(`${name}=`));
+    };
 
     useEffect(() => {
-        // Trigger force update if needed
-        forceUpdate();
-    }, [isLoggedIn]);
+        const checkCookie = () => {
+            if (doesCookieExist('isLoggedIn')) {
+                setIsLoggedIn(true);  // Cookie exists, consider logged in
+            } else {
+                setIsLoggedIn(false); // Cookie doesn't exist, consider logged out
+            }
+        };
 
-    // Actializar el estado
-    useEffect(() => {
-        // Check the cookie when the component mounts
-        const loggedInCookie = Cookies.get("isLoggedIn");
-        setIsLoggedIn(loggedInCookie === "true");
+        // Initial check when the component mounts
+        checkCookie();
+
+        // Set up a polling interval to check for cookie changes every second
+        const interval = setInterval(() => {
+            checkCookie();
+        }, 1000); // Check every second (you can adjust the interval)
+
+        // Clean up the interval when the component unmounts
+        return () => clearInterval(interval);
     }, []);
 
+
+
     return (
-        <LoginContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
             <div className="App">
                 <header className="App-header">
                     <Link to="/">
@@ -69,7 +75,6 @@ const App = () => {
                     </Routes>
                 </div>
             </div>
-        </LoginContext.Provider>
     );
 };
 
