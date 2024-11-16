@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect, useReducer} from "react";
 import "./styles/App.css";
 import { Route, Routes } from "react-router-dom";
 import LogIn from "./Pages/LogInPage.js";
@@ -18,6 +18,12 @@ import useAuth from "./Utils/Auth";
 
 const App = () => {
     const { isLoggedIn } = useAuth();
+    const [state, forceUpdate] = useReducer(x => x + 1, 0);
+
+    useEffect(() => {
+        // Trigger force update if needed
+        forceUpdate();
+    }, [isLoggedIn]);
 
     return (
         <div className="App">
