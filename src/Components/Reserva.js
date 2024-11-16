@@ -22,6 +22,7 @@ const Reserva = () => {
   const [locations, setLocations] = useState([]);
   const [dates, setDates] = useState([]);
   const [rooms, setRooms] = useState([]);
+  const [screeningsExists, setScreeningsExists] = useState(true);
 
   const navigate = useNavigate();
 
@@ -56,6 +57,9 @@ const Reserva = () => {
           return acc;
         }, []);
         setLocations(uniqueLocations);
+        if (locations.length === 0) {
+          setScreeningsExists(false);
+        }
       } catch (err) {
         console.error(err);
         setError("Error getting theater for the movie");
@@ -65,7 +69,7 @@ const Reserva = () => {
   }, [selectedMovie]);
 
   useEffect(() => {
-    if (selectedLocationId !== null) {
+    if (selectedLocationId !== null && selectedLocationId !== " ") {
       // Reset dependent states
       setSelectedDate("");
 
@@ -135,6 +139,7 @@ const Reserva = () => {
 
   if (loading) return <div className="loading">Loading...</div>;
   if (error) return <div className="error">{error}</div>;
+  if (!screeningsExists) return <div className="error">"Lo sentimos, pero no existen proyecciones de esta pelicual"</div>
 
   return (
     <div className="reserva-container">
