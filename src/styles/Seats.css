@@ -1,0 +1,44 @@
+.seats-container {
+  width: 100%; /* Full width of the parent container */
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Optional: centers the content vertically */
+  flex-direction: column; /* Stack the grid and selected seats vertically */
+  margin-top: 20px; /* Space from top */
+}
+
+.seats-grid {
+  display: grid;
+  grid-template-columns: repeat(10, 45px); /* 10 seats per row */
+  gap: 8px; /* Space between seats */
+  max-width: 800px; /* Control max width */
+  /* width: 100%; Ensure grid width takes available space */
+}
+
+.seat {
+  width: 45px; /* Fixed width for each seat */
+  height: 45px; /* Fixed height for each seat */
+  background-color: #ccc; /* Default color */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 5px; /* Optional: can be adjusted or removed */
+  text-align: center;
+  font-size: 14px;
+  user-select: none;
+  box-sizing: border-box; /* Ensure padding and borders are included in the size */
+  transition: background-color 0.2s ease; /* Smooth color transitions */
+}
+
+.seat.selected {
+  background-color: #4caf50; /* Highlight selected seats */
+}
+
+.seat:hover {
+  background-color: #aaa; /* Default hover color for unselected seats */
+}
+
+.seat.selected:hover {
+  background-color: #2e7d32; /* Dark green color for selected seats on hover */
+}

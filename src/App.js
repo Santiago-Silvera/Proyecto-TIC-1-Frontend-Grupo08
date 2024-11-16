@@ -15,6 +15,7 @@ import Button from "./Components/Button.js";
 // import Cookies from "js-cookie";
 import Profile from "./Pages/ProfilePage.js";
 import Logout from "./Pages/LogoutPage.js";
+import Seat from "./Pages/SeatPage.js";
 
 // Main App Component
 const App = () => {
@@ -69,6 +70,7 @@ const App = () => {
           <Route path="/movieUpload" element={<MovieUpload />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/logout" element={<Logout />} />
+          <Route path="/seats" element={<Seat />} />
         </Routes>
       </div>
     </div>
