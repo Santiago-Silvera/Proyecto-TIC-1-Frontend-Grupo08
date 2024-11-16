@@ -11,7 +11,7 @@ import moment from "moment";
 // Selecciona hora, reinicia asiento seleccionado
 
 const Reserva = () => {
-  // opciones que el usuario puede seleccionar
+  // Opciones que el usuario puede seleccionar
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [searchParams, setSearchParams] = useSearchParams();
@@ -49,6 +49,8 @@ const Reserva = () => {
         );
         setLoading(false);
         console.log(response);
+        console.log(response.data);
+        console.log(response.data.length);
         if (response.data.length === 0) {
           setNoScreeningsExists(true);
         }
