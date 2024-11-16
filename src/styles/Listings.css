@@ -25,7 +25,6 @@
 .movie-card {
   background-color: #222222; /* Fondo blanco para las tarjetas */
   overflow: hidden; /* Asegura que las imágenes no se desborden */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Sombra suave */
   text-align: center;
   display: flex;
   flex-direction: column; /* Alinea la imagen y el texto verticalmente */
@@ -39,9 +38,12 @@
   height: auto; /* Mantiene las proporciones de la imagen */
   object-fit: contain;
 }
+
 .text_container {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Sombra suave */
   background-color: #ffffff;
   overflow:hidden;
+  width: 100%;
 }
 
 .text_container h3 {

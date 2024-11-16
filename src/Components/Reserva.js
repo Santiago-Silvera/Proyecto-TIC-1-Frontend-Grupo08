@@ -49,8 +49,6 @@ const Reserva = () => {
         );
         setLoading(false);
         console.log(response);
-        console.log(response.data);
-        console.log(response.data.length);
         if (response.data.length === 0) {
           setNoScreeningsExists(true);
         }
@@ -62,7 +60,6 @@ const Reserva = () => {
           return acc;
         }, []);
         setLocations(uniqueLocations);
-        console.log(locations)
       } catch (err) {
         console.error(err);
         setError("Error getting theater for the movie");
@@ -72,7 +69,6 @@ const Reserva = () => {
   }, [selectedMovie]);
 
   useEffect(() => {
-    console.log(selectedLocationId);
     if (selectedLocationId !== null && selectedLocationId !== "" && selectedLocationId !== " ") {
       // Reset dependent states
       setSelectedDate("");
