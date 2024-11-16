@@ -2,6 +2,8 @@ import Cookies from "js-cookie";
 import { useState, useEffect } from "react";
 
 const Auth = () => {
+  // Update localStorage whenever isLoggedIn changes
+
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
@@ -12,16 +14,21 @@ const Auth = () => {
   const handleLogin = (jwtToken) => {
     if (jwtToken) {
       Cookies.set("jwtToken", jwtToken);
-      setIsLoggedIn(true);
+      console.log("Updated cookie 'jwtToken': ", Cookies.get("jwtToken"));
+      Cookies.set("isLoggedIn", "true");
+      console.log("Updated cookie 'isLoggedIn': ", Cookies.get("isLoggedIn"));
     }
   };
 
   const handleLogout = () => {
     Cookies.remove("jwtToken");
-    setIsLoggedIn(false);
-  };
+    Cookies.remove("isLoggedIn");
+  }
 
-  return { isLoggedIn, handleLogin, handleLogout };
+  return {isLoggedIn, handleLogin, handleLogout}
 };
 
 export default Auth;
+
+
+
