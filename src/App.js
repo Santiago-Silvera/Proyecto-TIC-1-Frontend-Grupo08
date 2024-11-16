@@ -33,7 +33,7 @@ const App = () => {
               <Button>Upload a Movie</Button>
             </Link>
             <Button onClick={isLoggedIn = false}> restart</Button>
-            {isLoggedIn ? <ProfileMenu /> : <LoggedOutHeader />}
+            {!isLoggedIn ? <ProfileMenu /> : <LoggedOutHeader />}
           </header>
 
           <div className="App-body">
