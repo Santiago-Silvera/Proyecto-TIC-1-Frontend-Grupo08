@@ -50,10 +50,10 @@ const Listings = () => {
         ))}
       </div>
       <div>
-        <button onClick={handlePrevPage} disabled={page === 0}>
+        <button className="buttons" onClick={handlePrevPage} disabled={page === 0}>
           Anterior
         </button>
-        <button onClick={handleNextPage} disabled={page === totalPages - 1}>
+        <button className="buttons" onClick={handleNextPage} disabled={page === totalPages - 1}>
           Siguiente
         </button>
       </div>

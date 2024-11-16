@@ -22,7 +22,7 @@ const Reserva = () => {
   const [locations, setLocations] = useState([]);
   const [dates, setDates] = useState([]);
   const [rooms, setRooms] = useState([]);
-  const [noScreeningsExists, setNoScreeningsExists] = useState(true);
+  const [noScreeningsExists, setNoScreeningsExists] = useState(false);
 
   const navigate = useNavigate();
 
