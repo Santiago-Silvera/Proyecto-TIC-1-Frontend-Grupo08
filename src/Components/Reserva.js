@@ -40,7 +40,6 @@ const Reserva = () => {
   // Siempre hay una pelicula seleccionada una vez se elige una
   useEffect(() => {
     // Se reinicia lo que viene despues
-    setSelectedDate("");
     const fetchScreenings = async () => {
       try {
         console.log("Fetching theaters for movie:" + selectedMovie);
@@ -76,6 +75,9 @@ const Reserva = () => {
       selectedLocationId !== " "
     ) {
       // Reset dependent states
+      setDates([])
+      setRooms([])
+      setSelectedRoomId(null)
       setSelectedDate("");
 
       const fetchDates = async () => {
@@ -101,7 +103,14 @@ const Reserva = () => {
   }, [selectedLocationId]);
 
   useEffect(() => {
-    if (selectedDate !== "") {
+    if (
+        selectedLocationId !== null &&
+        selectedLocationId !== "" &&
+        selectedLocationId !== " " &&
+        selectedDate !== ""
+    ) {
+      setRooms([])
+      setSelectedRoomId(null)
       const fetchRooms = async () => {
         try {
           console.log("Fetching rooms");
@@ -146,7 +155,7 @@ const Reserva = () => {
   if (noScreeningsExists)
     return (
       <div className="error">
-        "Lo sentimos, pero no existen proyecciones de esta pelicual"
+        "Lo sentimos, pero no existen proyecciones de esta pelicua"
       </div>
     );
 
