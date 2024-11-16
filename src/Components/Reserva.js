@@ -22,7 +22,7 @@ const Reserva = () => {
   const [locations, setLocations] = useState([]);
   const [dates, setDates] = useState([]);
   const [rooms, setRooms] = useState([]);
-  const [screeningsExists, setScreeningsExists] = useState(true);
+  const [noScreeningsExists, setNoScreeningsExists] = useState(true);
 
   const navigate = useNavigate();
 
@@ -49,6 +49,9 @@ const Reserva = () => {
         );
         setLoading(false);
         console.log(response);
+        if (response.data.length === 0) {
+          setNoScreeningsExists(true);
+        }
         // Ver localidades de las peliculas
         const uniqueLocations = response.data.reduce((acc, ele) => {
           if (!acc.some((loc) => loc.id === ele.theaterId)) {
@@ -57,9 +60,7 @@ const Reserva = () => {
           return acc;
         }, []);
         setLocations(uniqueLocations);
-        if (response.data.length === 0) {
-          setScreeningsExists(false);
-        }
+        console.log(locations)
       } catch (err) {
         console.error(err);
         setError("Error getting theater for the movie");
@@ -139,7 +140,7 @@ const Reserva = () => {
 
   if (loading) return <div className="loading">Loading...</div>;
   if (error) return <div className="error">{error}</div>;
-  if (!screeningsExists) return <div className="error">"Lo sentimos, pero no existen proyecciones de esta pelicual"</div>
+  if (noScreeningsExists) return <div className="error">"Lo sentimos, pero no existen proyecciones de esta pelicual"</div>
 
   return (
     <div className="reserva-container">
