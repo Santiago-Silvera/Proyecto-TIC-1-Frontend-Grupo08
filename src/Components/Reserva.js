@@ -57,7 +57,7 @@ const Reserva = () => {
           return acc;
         }, []);
         setLocations(uniqueLocations);
-        if (locations.length === 0) {
+        if (response.data.length === 0) {
           setScreeningsExists(false);
         }
       } catch (err) {
