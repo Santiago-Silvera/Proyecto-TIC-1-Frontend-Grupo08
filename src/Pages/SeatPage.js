@@ -5,6 +5,7 @@ import "../styles/Seats.css";
 
 const Seat = () => {
   const [searchParams] = useSearchParams();
+  const [loading, setLoading] = useState(true);
   const screeningId = searchParams.get("screeningId");
   const roomId = searchParams.get("roomId"); // Ensure roomId is retrieved here
 
@@ -73,7 +74,7 @@ const Seat = () => {
 
   return (
     <div>
-      <h2>Screening {screeningId}</h2>
+      <h2>Selecciona tus asientos</h2>
       <div className="seats-container">
         <div className="seats-grid">
           {Array.from({ length: seatCount }, (_, index) => {
@@ -93,13 +94,13 @@ const Seat = () => {
           })}
         </div>
       </div>
-      <button className="seat-button" onClick={handleReserva}>
-        Reservar
-      </button>
-
-      <p>
-        Selected seats: {selectedSeats.map((index) => index + 1).join(", ")}
-      </p>
+      {loading ? (
+        <p>Loading...</p>
+      ) : (
+        <button className="seat-button" onClick={handleReserva}>
+          Reservar
+        </button>
+      )}
     </div>
   );
 };
