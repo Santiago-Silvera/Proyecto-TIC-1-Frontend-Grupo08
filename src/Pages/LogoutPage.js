@@ -5,15 +5,14 @@ import Auth from "../Utils/Auth";
 
 const Logout = () => {
   const navigate = useNavigate();
+    const { handleLogout } = Auth();
 
   useEffect(() => {
     // Remove the authentication cookie (e.g., 'isLoggedIn')
-    Auth.handleLogout()
-
-
+   handleLogout();
     // Redirect to login page (or home page)
     navigate("/login");
-  }, [navigate]);
+  }, [navigate, handleLogout]);
 
   return (
     <div>

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React from "react";
 import "./styles/App.css";
 import {Route, Routes, useNavigate} from "react-router-dom";
 import LogIn from "./Pages/LogInPage.js";
@@ -20,11 +20,7 @@ import Auth from "./Utils/Auth"
 
 // Main App Component
 const App = () => {
-    const [isLoggedIn, setIsLoggedIn] = useState(Auth().isLoggedIn);
-
-    useEffect(() => {
-        setIsLoggedIn(Auth().isLoggedIn);
-    }, [Auth().isLoggedIn]);
+    const {isLoggedIn} = Auth();
 
   return (
         <div className="App">
