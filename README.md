@@ -42,11 +42,11 @@ El proyecto fue creado en base a [Create React App](https://github.com/facebook/
 Para su uso, es necesario correr los comandos:
 
 - Para instalar dependencias
-  ### npm install
+  `npm install`
 - Para levantar un servidor local (Esto se hace en localhost:3000)
-  ### npm start
+  `npm start`
 - Para crear una version de produccion
-  ### npm run build
+  `npm run build`
 
 Se puede ver una version de este proyecto [aca](https://proyecto-tic-1-frontend-grupo08.onrender.com) 
   
