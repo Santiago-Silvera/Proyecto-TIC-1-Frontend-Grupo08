@@ -15,6 +15,7 @@ En un inicio se contgara con 8 sucursales, con entre 3 y 10 salas, cada una con 
 
 Lista de Ubicaciones Iniciales
 |ID Sucursal|    	 Barrio      |Cantidad de Salas|
+|-----------|------------------|----------------|
 |1          | Punta Carretas   |8                |
 |2          | Ciudad Vieja     |5                |
 |3          | Pocitos          |7                |
@@ -46,5 +47,7 @@ Para su uso, es necesario correr los comandos:
   ### npm start
 - Para crear una version de produccion
   ### npm run build
+
+Se puede ver una version de este proyecto [aca](https://proyecto-tic-1-frontend-grupo08.onrender.com) 
   
 ## Modelo Enitdad Relacion Base
