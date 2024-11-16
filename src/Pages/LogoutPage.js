@@ -7,12 +7,16 @@ const Logout = () => {
   const navigate = useNavigate();
     const { handleLogout } = Auth();
 
-  useEffect(() => {
-    // Remove the authentication cookie (e.g., 'isLoggedIn')
-   handleLogout();
-    // Redirect to login page (or home page)
-    navigate("/login");
-  }, [navigate, handleLogout]);
+
+    useEffect(() => {
+        // Set function to remove the authentication cookie (e.g., 'isLoggedIn')
+        const performLogout = async () => {
+            await handleLogout();
+            navigate("/login");
+        };
+        // Redirect to login page (or home page)
+        performLogout();
+    }, [navigate, handleLogout]);
 
   return (
     <div>

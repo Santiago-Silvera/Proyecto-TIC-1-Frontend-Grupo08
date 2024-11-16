@@ -18,9 +18,7 @@ const LogIn = () => {
         username,
         password,
       });
-      console.log("Login successful:", response.data);
       const jwtToken = response.data["jwt"];
-      console.log("Retrieved token: ", jwtToken);
       handleLogin(jwtToken);
       navigate("/");
     } catch (error) {
