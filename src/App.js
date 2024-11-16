@@ -18,6 +18,9 @@ import useAuth from "./Utils/Auth";
 
 const App = () => {
     const { isLoggedIn } = useAuth();
+    const handleClick = () => {
+        console.log(isLoggedIn);
+    };
 
     return (
         <div className="App">
@@ -25,7 +28,7 @@ const App = () => {
                 <Link to="/">
                     <img src={logo} className="App-logo" alt="logo" />
                 </Link>
-                <Button onClick={console.log(isLoggedIn)}> state </Button>
+                <Button onClick={handleClick}> state </Button>
                 {isLoggedIn && (
                     <Link to="/movieUpload">
                         <Button>Upload a Movie</Button>
