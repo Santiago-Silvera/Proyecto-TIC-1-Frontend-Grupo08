@@ -1,18 +1,18 @@
 html, body {
-  min-height: 100vh;
   margin: 0;
   padding: 0;
-  overflow: hidden;
   background-color: #222222;
+  height: 100%;
+  overflow: hidden;
 }
-
 
 .App {
   text-align: center;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  height: 100vh;
   background-color: #222222;
+  overflow: hidden;
 }
 
 .App-logo {
@@ -23,8 +23,8 @@ html, body {
 }
 
 .App-buttons {
-  display: flex; /* Aligns buttons horizontally */
-  gap: 1rem; /* Optional: Space between buttons */
+  display: flex;
+  gap: 1rem;
   padding-right: 0.5rem;
   color: #ffffff;
 }
@@ -60,12 +60,17 @@ html, body {
 
 .App-header {
   background-color: #262626;
-  min-height: 10vh;
+  height: 10vh;
   display: flex;
   align-items: center;
   justify-content: space-between;
   font-size: calc(10px + 2vmin);
   color: white;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
 }
 
 .App-body {
@@ -77,6 +82,8 @@ html, body {
   font-size: calc(10px + 2vmin);
   color: white;
   overflow-y: auto;
+  margin-top: 10vh;
+  height: calc(100vh - 10vh);
 }
 
 .App-link {
@@ -84,33 +91,31 @@ html, body {
 }
 
 .App-footer {
-  background-color: #222; /* Dark background */
-  color: #fff; /* White text */
-  text-align: center; /* Centered text */
-  padding: 20px 0; /* Vertical padding */
-  position: relative; /* Allows positioning of child elements */
-  bottom: 0; /* Stick to bottom of the page */
-  width: 100%; /* Full width */
+  background-color: #222;
+  color: #fff;
+  text-align: center;
+  padding: 20px 0;
+  position: relative;
+  bottom: 0;
+  width: 100%;
 }
 
-/* Links in Footer */
 .App-footer a {
-  color: #7e3c83; /* Link color */
-  text-decoration: none; /* No underline */
-  margin: 0 15px; /* Space between links */
+  color: #7e3c83;
+  text-decoration: none;
+  margin: 0 15px;
 }
 
 .App-footer a:hover {
-  text-decoration: underline; /* Underline on hover */
+  text-decoration: underline;
 }
 
-/* Sacar? */
 @media (max-width: 600px) {
   .App-footer {
-    font-size: 14px; /* Smaller font on small screens */
+    font-size: 14px;
   }
 
   .App-footer a {
-    margin: 0 10px; /* Reduced space between links */
+    margin: 0 10px;
   }
 }

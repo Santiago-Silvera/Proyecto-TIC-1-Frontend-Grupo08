@@ -18,7 +18,7 @@ const MovieList = () => {
         const response = await axiosInstance.get(
           "/api/v1/movies?page=0&size=5"
         );
-        console.log(response.data.content);
+        console.log(response.data);
         if (response.data.content.length === 0) {
           setError("No movies found.");
           setLoading(false);
@@ -78,9 +78,11 @@ const MovieList = () => {
           <div className="movie-title">
             {animating ? prevMovie.title : currentMovie.title}
           </div>
+          {/*
           <div className="movie-info">
             {animating ? prevMovie.description : currentMovie.description}
           </div>
+          */}
           {currentMovie.image && (
             <img
               src={`data:image/jpeg;base64,${
@@ -94,7 +96,7 @@ const MovieList = () => {
         {slideDirection && (
           <div className={`movie-list-item slide-in-${slideDirection}`}>
             <div className="movie-title">{currentMovie.title}</div>
-            <div className="movie-info">{currentMovie.description}</div>
+            {/*<div className="movie-info">{currentMovie.description}</div>*/}
             {currentMovie.image && (
               <img
                 src={`data:image/jpeg;base64,${currentMovie.image}`}

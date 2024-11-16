@@ -1,11 +1,6 @@
-.RegisterPage-container {
-    display: flex;
-    justify-content: center;
-    margin: 50px auto;
-}
-
-.register-form {
+.signup-container {
     width: 450px;
+    margin: 50px auto;
     padding: 25px;
     border: 2px solid #7c4dff;
     border-radius: 12px;
@@ -13,7 +8,7 @@
     background-color: #ffffff;
 }
 
-.RegisterPage-container h2 {
+h2 {
     text-align: center;
     color: #333333;
     font-size: 26px;
@@ -21,24 +16,41 @@
     margin-bottom: 30px;
 }
 
-.register-form input {
+.signup-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    font-weight: 600;
+    margin-bottom: 8px;
+    display: block;
+    color: #333333;
+}
+
+input {
     width: 100%;
     padding: 14px;
     box-sizing: border-box;
     border: 2px solid #e0e0e0;
     border-radius: 10px;
     font-size: 16px;
-    margin-bottom: 20px;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.register-form input:focus {
+input:focus {
     border-color: #7c4dff;
     box-shadow: 0 0 8px rgba(124, 77, 255, 0.5);
     outline: none;
 }
 
-.RegisterPage-buttons {
+/* Updated button styles to match LogIn.css */
+.SingUp-buttons {
     width: 100%;
     padding: 15px;
     color: white;
@@ -46,17 +58,23 @@
     border: none;
     border-radius: 10px;
     cursor: pointer;
-    margin-top: 20px;
+    margin: 20px 0;
     font-size: 18px;
     font-weight: 700;
     transition: background-color 0.3s, transform 0.2s;
 }
 
-.RegisterPage-buttons:hover {
+.SingUp-buttons:hover {
     background-color: #6a3ae5;
     transform: scale(1.05);
 }
 
-.RegisterPage-buttons:active {
+.SingUp-buttons:active {
     transform: scale(0.98);
+}
+
+.error {
+    color: red;
+    font-size: 0.9em;
+    margin-top: 5px;
 }
