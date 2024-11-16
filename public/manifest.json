@@ -1,7 +1,13 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
-  "icons": [],
+  "short_name": "WTF Cinema",
+  "name": "Es la app de nuestro cine",
+  "icons": [
+    {
+      "src": "/logo.jpeg",
+      "sizes": "192x192",
+      "type": "image/jpeg"
+    }
+  ],
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",
