@@ -20,7 +20,7 @@ import Auth from "./Utils/Auth"
 
 // Main App Component
 const App = () => {
-    const { isLoggedIn } = Auth();
+    let { isLoggedIn } = Auth();
 
   return (
         <div className="App">
@@ -31,6 +31,7 @@ const App = () => {
             <Link to="/movieUpload">
               <Button>Upload a Movie</Button>
             </Link>
+              <button onClick={isLoggedIn = false}> restart</button>
             {isLoggedIn ? <ProfileMenu /> : <LoggedOutHeader />}
           </header>
 
