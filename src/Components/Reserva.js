@@ -72,7 +72,8 @@ const Reserva = () => {
   }, [selectedMovie]);
 
   useEffect(() => {
-    if (selectedLocationId !== null && selectedLocationId !== " ") {
+    console.log(selectedLocationId);
+    if (selectedLocationId !== null && selectedLocationId !== "" && selectedLocationId !== " ") {
       // Reset dependent states
       setSelectedDate("");
 
@@ -94,7 +95,6 @@ const Reserva = () => {
           setError("Error getting the available times");
         }
       };
-
       fetchDates();
     }
   }, [selectedLocationId]);
