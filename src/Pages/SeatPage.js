@@ -26,7 +26,7 @@ const Seat = () => {
           const res = await axiosInstance.get(
             `/api/v1/screenings/seats?screeningId=${screeningId}`
           );
-          setSelectedSeats(false);
+          setLoading(false);
           console.log("Taken seats: " + res);
           setTakenSeatas(res.data);
         } catch (err) {
