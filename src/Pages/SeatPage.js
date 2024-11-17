@@ -1,7 +1,8 @@
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axiosInstance from "../Utils/AxiosConfig";
 import "../styles/Seats.css";
+
 
 const Seat = () => {
   const [searchParams] = useSearchParams();
@@ -11,6 +12,11 @@ const Seat = () => {
   const [seatCount, setSeatCount] = useState(0);
   const [selectedSeats, setSelectedSeats] = useState([]);
   const [takenSeats, setTakenSeatas] = useState([]);
+
+  const navigate = useNavigate();
+  const goBack = () => {
+    navigate("/")
+  }
 
   useEffect(() => {
     if (screeningId) {
@@ -62,6 +68,8 @@ const Seat = () => {
         alert("Seats booked successfully!");
         // Optionally reset selected seats
         setSelectedSeats([]);
+        goBack()
+
       } else {
         alert("Failed to book seats. Please try again.");
       }
