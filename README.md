@@ -33,10 +33,6 @@ Lista de Ubicaciones Iniciales
 - Reserva de asiento(s) disponible(s)
 - Cancelación de reserva
 
-## Caracteristicas Principales
-
-## Flujo de la Aplicacion 
-
 ## Configuracion del Proyecto
 El proyecto fue creado en base a [Create React App](https://github.com/facebook/create-react-app).
 Para su uso, es necesario correr los comandos:
