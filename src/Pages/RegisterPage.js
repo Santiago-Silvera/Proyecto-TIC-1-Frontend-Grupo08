@@ -13,11 +13,13 @@ const RegisterPage = () => {
   const navigate = useNavigate();
 
   const handleSubmit = async () => {
+    // Checks password is right
     if (password !== confirmPassword) {
       console.error("Passwords do not match");
       return;
     }
 
+    // Funtion that reaches the backend
     try {
       const response = await axiosInstance.post("/api/v1/users/register", {
         username,
@@ -36,6 +38,7 @@ const RegisterPage = () => {
 
   return (
       <div className="RegisterPage-container">
+        {/* Containers to show and input data*/}
         <div className="register-form">
           <h2>Sign Up</h2>
           <input

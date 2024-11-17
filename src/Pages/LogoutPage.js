@@ -5,6 +5,7 @@ import Cookies from "js-cookie";
 const Logout = () => {
     const navigate = useNavigate();
 
+    // Resets cookies and moves you to log in page
     useEffect(() => {
         // Remove the authentication cookie (e.g., 'isLoggedIn')
         Cookies.remove("isLoggedIn");

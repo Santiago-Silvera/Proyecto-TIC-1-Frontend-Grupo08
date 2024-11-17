@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import "./Sucursales.css"
 
-
+// Not implemented
 
 const AboutUs = () => {
 

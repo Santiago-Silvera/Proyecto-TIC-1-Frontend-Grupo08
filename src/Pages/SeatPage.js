@@ -17,6 +17,7 @@ const Seat = () => {
 
   useEffect(() => {
     if (screeningId) {
+      // Gets seats and already occupied seats
       const fetchSeatCount = async () => {
         try {
           const response = await axiosInstance.get(
@@ -38,6 +39,7 @@ const Seat = () => {
     }
   }, [screeningId]);
 
+  // Seat selection logic
   const handleSeatClick = (seatId) => {
     if (takenSeats.includes(seatId)) {
       return;
@@ -50,12 +52,15 @@ const Seat = () => {
     );
   };
 
+
   const handleReserva = async () => {
+    // Only can reserve one seat or more
     if (selectedSeats.length === 0) {
       alert("No seats selected!");
       return;
     }
 
+    // Reaches to end point and if successful redirects to homepage
     try {
       const response = await axiosInstance.post(
           `/api/v1/screenings/reserve?screeningId=${screeningId}&seatNumbers=${selectedSeats}`
@@ -63,7 +68,6 @@ const Seat = () => {
 
       if (response.status === 200) {
         alert("Seats booked successfully!");
-        // Optionally reset selected seats
         setSelectedSeats([]);
         navigate("/");
 
@@ -99,7 +103,7 @@ const Seat = () => {
           </div>
         </div>
         <button className="seat-button" onClick={handleReserva}>
-          Reservar
+          Reserve
         </button>
       </div>
   );

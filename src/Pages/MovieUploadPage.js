@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axiosInstance from "../Utils/AxiosConfig";
 
+// For development, to upload movies easily
 const MovieUpload = () => {
   const [file, setFile] = useState(null);
   const [title, setTitle] = useState("");

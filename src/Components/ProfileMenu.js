@@ -8,6 +8,7 @@ const ProfileMenu = () => {
   const [menuPosition, setMenuPosition] = useState({ top: 0, left: 0 });
   const profileRef = useRef(null);
 
+  // Dropdown for seeing profile and logging out
   const toggleDropdown = () => {
     if (profileRef.current) {
       const rect = profileRef.current.getBoundingClientRect();
@@ -41,6 +42,7 @@ const ProfileMenu = () => {
 
   return (
     <div className="profile-menu-container">
+      {/* Button with the banner image to open dropdown menu*/}
       <img
         ref={profileRef}
         src={getPfp()}

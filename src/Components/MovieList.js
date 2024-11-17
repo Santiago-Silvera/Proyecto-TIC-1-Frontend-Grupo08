@@ -11,6 +11,7 @@ const MovieList = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  // Get the movies as the page loads
   useEffect(() => {
     const fetchMovies = async () => {
       try {
@@ -35,6 +36,7 @@ const MovieList = () => {
     fetchMovies();
   }, []);
 
+  // Scroll pages
   useEffect(() => {
     const timeout = setTimeout(() => {
       setSlideDirection("");
@@ -43,6 +45,7 @@ const MovieList = () => {
     return () => clearTimeout(timeout);
   }, [slideDirection]);
 
+  // Logic for next and previous
   const handleNext = () => {
     setAnimating(true);
     setSlideDirection("next");
@@ -70,6 +73,7 @@ const MovieList = () => {
   return (
     <div className="movie-container">
       <div className="movie-wrapper">
+        {/* Show the movie*/}
         <div
           className={`movie-list-item ${
             slideDirection ? `slide-out-${slideDirection}` : ""
@@ -107,6 +111,7 @@ const MovieList = () => {
         )}
       </div>
 
+      {/* Scroll between the movies*/}
       <div className="navigation-buttons">
         <button onClick={handlePrevious} disabled={animating}>
           Previous

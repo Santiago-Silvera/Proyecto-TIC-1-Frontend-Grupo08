@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import axiosInstance from "../Utils/AxiosConfig";
-import { useNavigate } from "react-router-dom"; // Importar useNavigate para redirigir
-import "../styles/LogIn.css"; // Asegúrate de tener el archivo CSS correspondiente
+import { useNavigate } from "react-router-dom"; // Allows to redirect
+import "../styles/LogIn.css";
 import Auth from "../Utils/Auth";
 
 const LogIn = () => {
-  // Estados para el correo electrónico y la contraseña
+  // States for username and password
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const { handleLogin } = Auth();
-  const navigate = useNavigate(); // Inicializar useNavigate
+  const navigate = useNavigate(); // Initializing navigate
 
-  // Función para manejar el inicio de sesión con email
+  // Manages logging in
   const handleSubmit = async () => {
     try {
       const response = await axiosInstance.post("/api/v1/users/login", {
@@ -24,7 +24,6 @@ const LogIn = () => {
       handleLogin(jwtToken);
       navigate("/");
     } catch (error) {
-      // TODO: Mostrar que hubo un error con el log in
       console.error("Error during username login:", error);
     }
   };

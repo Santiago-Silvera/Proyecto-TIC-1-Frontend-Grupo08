@@ -7,11 +7,11 @@ const Profile = () => {
   const [user, setUser] = useState({})
 
   const navigate = useNavigate();
-  // Solo se puede ver si estas logeado
+  // You only can see it if you are logged in
   useEffect(() => {
     const isLoggedIn = Cookies.get("isLoggedIn");
     if (!isLoggedIn || isLoggedIn !== "true") {
-      navigate("/"); // Se vuelve a la pagina de inicio
+      navigate("/"); // Go to homepage
     }
   }, [navigate]);
 
@@ -21,10 +21,10 @@ const Profile = () => {
 
     if (cookie) {
       console.log(cookie.split("=")[1])
-      return cookie.split("=")[1]; // Devuelve su valor
+      return cookie.split("=")[1]; // Get the value
     }
 
-    return ""; // String vacio si no existe
+    return "";
   };
 
 
@@ -32,7 +32,7 @@ const Profile = () => {
   useEffect(() => {
     const getUserData = async () => {
       try {
-        console.log("Consiguiendo informacion de usuario");
+        console.log("Getting user data");
         const userToken = getCookieValue("jwtToken")
         const response = await axiosInstance.get(
             `/api/v1/users/userInfo?token=${userToken}`
@@ -47,6 +47,7 @@ const Profile = () => {
     getUserData()
   }, [])
 
+  // Not implemented due to problems with the endpoint
   return <></>;
 };
 

@@ -4,14 +4,8 @@ import "../styles/Reservations.css";
 import axiosInstance from "../Utils/AxiosConfig";
 import Cookies from "js-cookie";
 import moment from "moment";
-// Que falta
-// Al seleccionar las peliculas, se reinicia cine y lo demas (Se actualiza selected Movie, se ven  los cines para esa peli y reinicia lo demas )
-// Al seleccionar el cine, se reinicia horas fechas y asientos
-// Selecciona fecha, reinicia horas y asientos
-// Selecciona hora, reinicia asiento seleccionado
 
 const Reserva = () => {
-  // Opciones que el usuario puede seleccionar
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [searchParams, setSearchParams] = useSearchParams();
@@ -26,7 +20,7 @@ const Reserva = () => {
 
   const navigate = useNavigate();
 
-  // Verificar si el usuario está logueado
+  // Check if user is logged in
   useEffect(() => {
     const isLoggedIn = Cookies.get("isLoggedIn");
     if (!isLoggedIn || isLoggedIn !== "true") {
@@ -36,10 +30,8 @@ const Reserva = () => {
 
   const selectedMovie = searchParams.get("movie");
 
-  // Una vez se selecciona la pelicula, se elige el cine, cuando pasa se reinician los valores de horas y dias
-  // Siempre hay una pelicula seleccionada una vez se elige una
   useEffect(() => {
-    // Se reinicia lo que viene despues
+    // Load the locations
     const fetchScreenings = async () => {
       try {
         console.log("Fetching theaters for movie:" + selectedMovie);
@@ -51,7 +43,6 @@ const Reserva = () => {
         if (response.data.length === 0) {
           setNoScreeningsExists(true);
         }
-        // Ver localidades de las peliculas
         const uniqueLocations = response.data.reduce((acc, ele) => {
           if (!acc.some((loc) => loc.id === ele.theaterId)) {
             acc.push({ id: ele.theaterId, name: ele.theaterZone });
@@ -69,6 +60,7 @@ const Reserva = () => {
   }, [selectedMovie]);
 
   useEffect(() => {
+    // Reset what's needed, only get data if possible
     if (selectedLocationId === "") {
       setDates([])
       setRooms([])
@@ -80,7 +72,6 @@ const Reserva = () => {
       selectedLocationId !== "" &&
       selectedLocationId !== " "
     ) {
-      // Reset dependent states
       setDates([])
       setRooms([])
       setSelectedRoomId(null)
@@ -108,6 +99,7 @@ const Reserva = () => {
     }
   }, [selectedLocationId]);
 
+  // Same as getting dates from location, but seats from date and location
   useEffect(() => {
     if (
         selectedLocationId !== null &&
@@ -139,7 +131,7 @@ const Reserva = () => {
     }
   }, [selectedDate]);
 
-  // Encontrar el screening dado los datos y seguir a seleccion de asientos
+  // Keeps all tada and moves to the seats reserving webpage
   const handleReserve = async () => {
     try {
       console.log("Finding screening");
@@ -156,9 +148,11 @@ const Reserva = () => {
     }
   };
 
+  // Stops you from doing something if it is loading or there's and error
   if (loading) return <div className="loading">Loading...</div>;
   if (error) return <div className="error">{error}</div>;
   if (noScreeningsExists)
+    // Exception in case there are no screenings
     return (
       <div className="error">
         "Lo sentimos, pero no existen proyecciones de esta pelicula"
@@ -167,10 +161,10 @@ const Reserva = () => {
 
   return (
     <div className="reserva-container">
-      <h2 className="reserva-title">Realiza la reserva de tu pelicula</h2>
-      {/* Selección de Lugar (cine) ajustar a que a travez del lugar se seleccione el objeto, como arriba*/}
+      <h2 className="reserva-title">Make your movie reservation</h2>
+      {/* Select the cinema*/}
       <div className="reserva-field">
-        <label>Selecciona el cine:</label>
+        <label>Select the location:</label>
         <select
           value={selectedLocationId}
           onChange={(e) => {
@@ -178,7 +172,7 @@ const Reserva = () => {
             setSelectedLocationId(selectedId);
           }}
         >
-          <option value="">Select a location</option>
+          <option value="">Select the location</option>
           {locations
               .sort((a, b) => a.name.localeCompare(b.name)) // Sort alphabetically by name
               .map((location) => (
@@ -189,15 +183,16 @@ const Reserva = () => {
         </select>
       </div>
 
+      {/* Selection of date*/}
       <div>
         {dates.length > 0 && (
           <div className="reserva-field">
-            <label>Selecciona la fecha:</label>
+            <label>Select the date:</label>
             <select
               value={selectedDate}
               onChange={(e) => setSelectedDate(e.target.value)}
             >
-              <option value="">Seleccione una fecha</option>
+              <option value="">Select the date</option>
               {dates
                   .sort((a, b) => moment(a).isBefore(moment(b)) ? -1 : 1) // Se ordenan las fechas
                   .map((date) => (
@@ -210,15 +205,16 @@ const Reserva = () => {
         )}
       </div>
 
+      {/* Selection of room*/}
       <div>
         {rooms.length > 0 && (
           <div className="reserva-field">
-            <label>Selecciona la sala:</label>
+            <label>Select the room:</label>
             <select
               value={selectedRoomId}
               onChange={(e) => setSelectedRoomId(e.target.value)}
             >
-              <option value="">Seleccione la sala</option>
+              <option value="">Select the room</option>
               {rooms.map((room) => (
                 <option key={room} value={room}>
                   {"Sala " + room}
@@ -229,9 +225,9 @@ const Reserva = () => {
         )}
       </div>
 
-      {/* Botón de Confirmar Reserva */}
+      {/* Confirm reservation */}
       <button className="reserva-button" onClick={handleReserve}>
-        Siguiente
+        Continue
       </button>
     </div>
   );

@@ -12,7 +12,7 @@ const Auth = () => {
     }
   };
 
-  // No se usa esto de abajo
+  // Not in use, cookies are manually reset upon logging out
   const handleLogout = () => {};
 
   return { handleLogin, handleLogout };
