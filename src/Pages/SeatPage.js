@@ -5,7 +5,6 @@ import "../styles/Seats.css";
 
 const Seat = () => {
   const [searchParams] = useSearchParams();
-  const [loading, setLoading] = useState(true);
   const screeningId = searchParams.get("screeningId");
   const roomId = searchParams.get("roomId"); // Ensure roomId is retrieved here
 
@@ -18,15 +17,14 @@ const Seat = () => {
       const fetchSeatCount = async () => {
         try {
           const response = await axiosInstance.get(
-            `/api/v1/screenings/seatCount?screeningId=${screeningId}`
+              `/api/v1/screenings/seatCount?screeningId=${screeningId}`
           );
           console.log(response);
           setSeatCount(response.data);
 
           const res = await axiosInstance.get(
-            `/api/v1/screenings/seats?screeningId=${screeningId}`
+              `/api/v1/screenings/seats?screeningId=${screeningId}`
           );
-          setLoading(false);
           console.log("Taken seats: " + res);
           setTakenSeatas(res.data);
         } catch (err) {
@@ -42,10 +40,10 @@ const Seat = () => {
       return;
     }
     setSelectedSeats(
-      (prevSelected) =>
-        prevSelected.includes(seatId)
-          ? prevSelected.filter((id) => id !== seatId) // Deselect seat
-          : [...prevSelected, seatId] // Select seat
+        (prevSelected) =>
+            prevSelected.includes(seatId)
+                ? prevSelected.filter((id) => id !== seatId) // Deselect seat
+                : [...prevSelected, seatId] // Select seat
     );
   };
 
@@ -57,7 +55,7 @@ const Seat = () => {
 
     try {
       const response = await axiosInstance.post(
-        `/api/v1/screenings/reserve?screeningId=${screeningId}&seatNumbers=${selectedSeats}`
+          `/api/v1/screenings/reserve?screeningId=${screeningId}&seatNumbers=${selectedSeats}`
       );
 
       if (response.status === 200) {
@@ -74,35 +72,35 @@ const Seat = () => {
   };
 
   return (
-    <div>
-      <h2>Selecciona tus asientos</h2>
-      <div className="seats-container">
-        <div className="seats-grid">
-          {Array.from({ length: seatCount }, (_, index) => {
-            const seatId = 150 * roomId + (index + 1); // Calculate seatId
-            const isTaken = takenSeats.includes(seatId); // Check if seat is taken
-            return (
-              <div
-                key={index}
-                className={`seat ${
-                  selectedSeats.includes(seatId) ? "selected" : ""
-                } ${isTaken ? "taken" : ""}`}
-                onClick={() => handleSeatClick(seatId)} // Pass seatId here
-              >
-                {index + 1}
-              </div>
-            );
-          })}
+      <div>
+        <h2>Selecciona tus asientos</h2>
+        <div className="seats-container">
+          <div className="seats-grid">
+            {Array.from({ length: seatCount }, (_, index) => {
+              const seatId = 150 * roomId + (index + 1); // Calculate seatId
+              const isTaken = takenSeats.includes(seatId); // Check if seat is taken
+              return (
+                  <div
+                      key={index}
+                      className={`seat ${
+                          selectedSeats.includes(seatId) ? "selected" : ""
+                      } ${isTaken ? "taken" : ""}`}
+                      onClick={() => handleSeatClick(seatId)} // Pass seatId here
+                  >
+                    {index + 1}
+                  </div>
+              );
+            })}
+          </div>
         </div>
-      </div>
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
         <button className="seat-button" onClick={handleReserva}>
           Reservar
         </button>
-      )}
-    </div>
+
+        <p>
+          Selected seats: {selectedSeats.map((index) => index + 1).join(", ")}
+        </p>
+      </div>
   );
 };
 
