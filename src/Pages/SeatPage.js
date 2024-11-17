@@ -14,9 +14,6 @@ const Seat = () => {
   const [takenSeats, setTakenSeatas] = useState([]);
 
   const navigate = useNavigate();
-  const goBack = () => {
-    navigate("/")
-  }
 
   useEffect(() => {
     if (screeningId) {
@@ -68,7 +65,7 @@ const Seat = () => {
         alert("Seats booked successfully!");
         // Optionally reset selected seats
         setSelectedSeats([]);
-        goBack()
+        navigate("/");
 
       } else {
         alert("Failed to book seats. Please try again.");
@@ -104,10 +101,6 @@ const Seat = () => {
         <button className="seat-button" onClick={handleReserva}>
           Reservar
         </button>
-
-        <p>
-          Selected seats: {selectedSeats.map((index) => index + 1).join(", ")}
-        </p>
       </div>
   );
 };
